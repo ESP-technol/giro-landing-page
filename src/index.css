@@ -1,0 +1,44 @@
+/* Giro by ESPtech — tema Tailwind CSS v4 — src/index.css */
+@import "tailwindcss";
+
+@theme {
+  /* Tipografia */
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+  /* Marca: verde = Giro e estado "Livre" */
+  --color-giro: #20c218;
+  --color-giro-strong: #11800d; /* texto verde legível sobre fundo claro (5,2:1) */
+  --color-giro-soft: #e3f8e0;
+
+  /* Ação: azul = botões primários, links, seleção */
+  --color-action: #2347f5;
+  --color-action-strong: #1a37c8;
+  --color-action-soft: #e8ecff;
+
+  /* Destaque: lima = tempo real, "Livre agora", sugestão principal */
+  --color-lime: #ccf53d;
+  --color-lime-soft: #f3fccf;
+
+  /* Texto e superfícies */
+  --color-ink: #181d1f;
+  --color-ink-muted: #5b6366;
+  --color-ink-subtle: #8f989a;
+  --color-canvas: #f4f6f5;
+  --color-line: #e1e6e3;
+
+  /* Estados de leito (sempre cor + palavra) */
+  --color-reserved: #9a5b00;
+  --color-reserved-soft: #fff1cc;
+  --color-reserved-dot: #e0a100;
+  --color-discharge: #5b2bc9;
+  --color-discharge-soft: #eee8ff;
+  --color-discharge-dot: #7c4dff;
+  --color-cleaning: #5b6366;
+  --color-cleaning-soft: #eceff0;
+  --color-cleaning-dot: #8f989a;
+
+  /* Alerta / emergência */
+  --color-alert: #b42318;
+  --color-alert-soft: #fee4e2;
+}
