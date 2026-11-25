@@ -69,13 +69,6 @@ export default function App() {
   }, [])
 
   return (
-    <Landing
-      beds={beds}
-      queue={queue}
-      now={now}
-      onEnter={() => {
-        document.getElementById('contato')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      }}
-    />
+    <Landing beds={beds} queue={queue} now={now} />
   )
 }

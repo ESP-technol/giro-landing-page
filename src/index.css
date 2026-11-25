@@ -10,6 +10,7 @@
   --color-giro: #20c218;
   --color-giro-strong: #11800d; /* texto verde legível sobre fundo claro (5,2:1) */
   --color-giro-soft: #e3f8e0;
+  --color-giro-deep: #0c6409; /* hover dos botões de WhatsApp */
 
   /* Ação: azul = botões primários, links, seleção */
   --color-action: #2347f5;

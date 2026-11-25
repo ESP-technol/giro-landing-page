@@ -27,4 +27,4 @@ src/
 public/brand/   SVGs da marca
 ```
 
-Os botões “Entrar no painel” levam à seção de contato (o painel operacional não faz parte deste repo).
+Os botões de contato abrem uma conversa no WhatsApp da ESPtech. O número fica em `WHATSAPP_URL`, no topo de `src/Landing.jsx`.

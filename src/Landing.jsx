@@ -4,8 +4,8 @@
  */
 import { useMemo } from 'react'
 import {
-  BTN_PRIMARY,
   BTN_SECONDARY,
+  BTN_WHATSAPP,
   FRESH_MS,
   GiroMark,
   GiroWordmark,
@@ -17,6 +17,19 @@ import {
 } from './ui.jsx'
 
 const WRAP = 'mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8'
+
+const WHATSAPP_URL =
+  'https://wa.me/5554984248922?text=' +
+  encodeURIComponent('Olá! Quero conhecer o Giro e entender como ele pode aumentar o giro de leitos do meu hospital.')
+
+function WhatsAppButton({ children, className = '' }) {
+  return (
+    <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className={`${BTN_WHATSAPP} ${className}`}>
+      <Icon name="chat" className="size-4 shrink-0" />
+      {children}
+    </a>
+  )
+}
 
 const PROBLEM = [
   { value: '28%', label: 'das diárias na saúde privada estão em excesso' },
@@ -72,24 +85,25 @@ function scrollToId(id) {
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
 }
 
-export default function Landing({ beds, queue, now, onEnter }) {
+export default function Landing({ beds, queue, now }) {
   return (
     <div className="min-h-screen bg-white font-sans text-ink antialiased">
-      <LandingNav onEnter={onEnter} />
+      <LandingNav />
       <main>
-        <Hero beds={beds} queue={queue} now={now} onEnter={onEnter} />
+        <Hero beds={beds} queue={queue} now={now} />
         <Problem />
         <HowItWorks />
         <Pipeline />
         <Audience />
-        <FinalCta onEnter={onEnter} />
+        <FinalCta />
       </main>
       <LandingFooter />
+      <FloatingWhatsApp />
     </div>
   )
 }
 
-function LandingNav({ onEnter }) {
+function LandingNav() {
   const links = [
     ['como-funciona', 'Como funciona'],
     ['integracao', 'Integração'],
@@ -111,9 +125,7 @@ function LandingNav({ onEnter }) {
             </button>
           ))}
         </nav>
-        <button type="button" onClick={onEnter} className={`${BTN_PRIMARY} py-2`}>
-          Entrar no painel
-        </button>
+        <WhatsAppButton className="py-2">Fale conosco</WhatsAppButton>
       </div>
     </header>
   )
@@ -123,7 +135,7 @@ function LandingNav({ onEnter }) {
 /* Herói                                                               */
 /* ------------------------------------------------------------------ */
 
-function Hero({ beds, queue, now, onEnter }) {
+function Hero({ beds, queue, now }) {
   return (
     <section className={`${WRAP} grid grid-cols-1 items-center gap-12 pt-12 pb-20 lg:grid-cols-[1.05fr_1fr] lg:pt-20 lg:pb-28`}>
       <div className="min-w-0">
@@ -131,25 +143,25 @@ function Hero({ beds, queue, now, onEnter }) {
           <span className="size-2 rounded-full bg-giro" />
           Gestão inteligente de leitos hospitalares
         </p>
-        <h1 className="mt-6 text-5xl leading-[0.95] font-extrabold tracking-tighter text-balance text-ink sm:text-6xl xl:text-7xl">
+        <h1 className="mt-6 text-5xl leading-[1.05] font-extrabold tracking-tighter text-balance text-ink sm:text-6xl xl:text-7xl">
           Cada leito,
           <br />
-          <span className="-mx-1 rounded-md bg-lime box-decoration-clone px-2">no tempo certo.</span>
+          <span className="-mx-[0.08em] box-decoration-clone bg-[linear-gradient(to_top,var(--color-lime)_0.12em,var(--color-lime)_0.52em,transparent_0.52em)] px-[0.08em]">
+            no tempo certo.
+          </span>
         </h1>
-        <p className="mt-7 max-w-xl text-lg leading-relaxed text-ink-muted">
-          O Giro conecta a triagem à hotelaria do hospital, prevê o tempo de permanência logo na admissão e sugere o leito
-          certo para cada paciente. Mais giro de leitos, sem construir um leito.
+        <p className="mt-7 max-w-xl text-lg leading-relaxed text-pretty text-ink-muted">
+          Leito parado custa caro e paciente no corredor custa mais ainda. O Giro prevê as altas, organiza a limpeza e sugere o
+          leito certo para cada paciente, para o seu hospital <strong className="font-semibold text-ink">internar mais sem construir nada</strong>.
         </p>
         <div className="mt-9 flex flex-wrap gap-3">
-          <button type="button" onClick={onEnter} className={`${BTN_PRIMARY} px-5 py-3 text-base`}>
-            Entrar no painel
-            <Icon name="arrow" className="size-4" />
-          </button>
+          <WhatsAppButton className="px-5 py-3 text-base">Quero o Giro no meu hospital</WhatsAppButton>
           <button type="button" onClick={() => scrollToId('como-funciona')} className={`${BTN_SECONDARY} px-5 py-3 text-base`}>
             Ver como funciona
           </button>
         </div>
-        <ul className="mt-9 flex flex-col gap-2.5 text-sm text-ink-muted sm:flex-row sm:flex-wrap sm:gap-x-6">
+        <p className="mt-3 text-sm text-ink-subtle">Fale direto com a equipe ESPtech pelo WhatsApp. Conversa rápida e sem compromisso.</p>
+        <ul className="mt-8 flex flex-col gap-2.5 text-sm text-ink-muted sm:flex-row sm:flex-wrap sm:gap-x-6">
           {['Integra com o ERP que o hospital já usa', 'Dados tratados sob a LGPD', 'A decisão final é do profissional'].map((text) => (
             <li key={text} className="flex items-center gap-2">
               <Icon name="check" className="size-4 shrink-0 text-giro-strong" />
@@ -280,6 +292,12 @@ function Problem() {
           ))}
         </div>
         <p className="mt-5 text-xs text-ink-subtle">Fontes: estudo DRG Brasil (2019) e estimativas ESPtech.</p>
+        <div className="mt-10 flex flex-col gap-5 rounded-2xl bg-ink p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">
+          <p className="max-w-xl text-lg leading-snug font-bold text-white sm:text-xl">
+            Quanto o seu hospital perde com leitos parados? <span className="text-lime">Descubra numa conversa rápida.</span>
+          </p>
+          <WhatsAppButton className="shrink-0 px-5 py-3 text-base">Falar com um especialista</WhatsAppButton>
+        </div>
       </div>
     </section>
   )
@@ -368,7 +386,7 @@ function Audience() {
   )
 }
 
-function FinalCta({ onEnter }) {
+function FinalCta() {
   return (
     <section id="contato" className="scroll-mt-20 pb-20 lg:pb-24">
       <div className={WRAP}>
@@ -379,17 +397,19 @@ function FinalCta({ onEnter }) {
               Você fornece o espaço. <span className="text-lime">A gestão a gente resolve.</span>
             </h2>
             <p className="mt-5 text-base leading-relaxed text-white/75 sm:text-lg">
-              Veja o Giro funcionando com dados de exemplo, ou fale com a ESPtech para levar o painel ao seu hospital.
+              Sem obra e sem trocar de sistema. Chame a ESPtech no WhatsApp e veja como o Giro pode colocar mais leitos para
+              girar no seu hospital.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-4">
-              <button
-                type="button"
-                onClick={onEnter}
+              <a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-lg bg-lime px-5 py-3 text-base font-semibold text-ink transition hover:brightness-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime"
               >
-                Entrar no painel
-                <Icon name="arrow" className="size-4" />
-              </button>
+                <Icon name="chat" className="size-4" />
+                Chamar no WhatsApp
+              </a>
               <div className="text-sm text-white/75">
                 <p className="font-semibold text-white select-all">esptechnologies@outlook.com</p>
                 <p className="select-all">@esp.technologies</p>
@@ -417,3 +437,17 @@ function LandingFooter() {
   )
 }
 
+
+function FloatingWhatsApp() {
+  return (
+    <a
+      href={WHATSAPP_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Falar com a ESPtech no WhatsApp"
+      className="fixed right-4 bottom-4 z-40 flex size-14 items-center justify-center rounded-full bg-giro-strong text-white shadow-xl transition hover:scale-105 hover:bg-giro-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-giro-strong sm:right-6 sm:bottom-6"
+    >
+      <Icon name="chat" className="size-6" />
+    </a>
+  )
+}

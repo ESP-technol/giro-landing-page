@@ -93,6 +93,7 @@ export const ICONS = {
     </>
   ),
   check: <path d="M20 6 9 17l-5-5" />,
+  chat: <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />,
   minus: <path d="M5 12h14" />,
   link: (
     <>
@@ -181,6 +182,8 @@ export const fmtClock = (ts) => new Date(ts).toLocaleTimeString('pt-BR')
 
 export const BTN_PRIMARY =
   'inline-flex items-center justify-center gap-2 rounded-lg bg-action px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-action-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-action disabled:cursor-not-allowed disabled:opacity-40'
+export const BTN_WHATSAPP =
+  'inline-flex items-center justify-center gap-2 rounded-lg bg-giro-strong px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-giro-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-giro-strong'
 export const BTN_PRIMARY_SM =
   'inline-flex items-center justify-center gap-1.5 rounded-lg bg-action px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-action-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-action'
 export const BTN_SECONDARY =
